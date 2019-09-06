@@ -1,7 +1,7 @@
 # Define path to cache and memory zone. The memory zone should be unique.
-# keys_zone=linuxsuperuser.com:100m creates the memory zone and sets the maximum size in MBs.
+# keys_zone=sinisakrisan.com:100m creates the memory zone and sets the maximum size in MBs.
 # inactive=60m will remove cached items that haven't been accessed for 60 minutes or more.
-fastcgi_cache_path /var/www/linuxsuperuser.com/cache levels=1:2 keys_zone=linuxsuperuser.com:100m inactive=60m;
+fastcgi_cache_path /var/www/sinisakrisan.com/cache levels=1:2 keys_zone=sinisakrisan.com:100m inactive=60m;
 
 server {
 	# Ports to listen on, uncomment one.
@@ -9,21 +9,21 @@ server {
 	listen [::]:443 ssl http2;
 
 	# Server name to listen for
-	server_name linuxsuperuser.com;
+	server_name sinisakrisan.com;
 
 	# Path to document root
-	root /var/www/linuxsuperuser.com/public;
+	root /var/www/sinisakrisan.com;
 
 	# Paths to certificate files.
-	ssl_certificate /etc/letsencrypt/live/linuxsuperuser.com/fullchain.pem;
-	ssl_certificate_key /etc/letsencrypt/live/linuxsuperuser.com/privkey.pem;
+	ssl_certificate /etc/letsencrypt/live/sinisakrisan.com/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/sinisakrisan.com/privkey.pem;
 
 	# File to be used as index
 	index index.php;
 
 	# Overrides logs defined in nginx.conf, allows per site logs.
-	access_log /var/www/linuxsuperuser.com/logs/access.log;
-	error_log /var/www/linuxsuperuser.com/logs/error.log;
+	access_log /var/www/sinisakrisan.com/logs/access.log;
+	error_log /var/www/sinisakrisan.com/logs/error.log;
 
 	# Default server block rules
 	include global/server/defaults.conf;
@@ -51,7 +51,7 @@ server {
 		fastcgi_no_cache $skip_cache;
 
 		# Define memory zone for caching. Should match key_zone in fastcgi_cache_path above.
-		fastcgi_cache linuxsuperuser.com;
+		fastcgi_cache sinisakrisan.com;
 
 		# Define caching time.
 		fastcgi_cache_valid 60m;
@@ -62,7 +62,7 @@ server {
 
 	# Uncomment if using the fastcgi_cache_purge module and Nginx Helper plugin (https://wordpress.org/plugins/nginx-helper/)
 	# location ~ /purge(/.*) {
-	#	fastcgi_cache_purge linuxsuperuser.com "$scheme$request_method$host$1";
+	#	fastcgi_cache_purge sinisakrisan.com "$scheme$request_method$host$1";
 	# }
 }
 
@@ -70,16 +70,16 @@ server {
 server {
 	listen 80;
 	listen [::]:80;
-	server_name linuxsuperuser.com www.linuxsuperuser.com;
+	server_name sinisakrisan.com www.sinisakrisan.com;
 
-	return 301 https://linuxsuperuser.com$request_uri;
+	return 301 https://sinisakrisan.com$request_uri;
 }
 
 # Redirect www to non-www
 server {
 	listen 443;
 	listen [::]:443;
-	server_name www.linuxsuperuser.com;
+	server_name www.sinisakrisan.com;
 
-	return 301 https://linuxsuperuser.com$request_uri;
+	return 301 https://sinisakrisan.com$request_uri;
 }
